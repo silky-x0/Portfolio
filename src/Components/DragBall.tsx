@@ -66,7 +66,7 @@ function useFollowPointer(
 ) {
     // Created unique spring configuration for each ball
     const springConfig = {
-        damping: 5 + (index * 3), // Increasing damping for each ball
+        damping: 7, // Increasing damping for each ball
         stiffness: index % 2 === 0 ? 100 - (index * 10) : 100 + (index * 10), // Decreasing stiffness for each ball
         restDelta: 0.001
     }
