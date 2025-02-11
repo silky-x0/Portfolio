@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Header from './Components/Header'
 import Hero from './Components/Hero'
+import DragBall from './Components/DragBall'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
     >
       <Header title='Akhil' />
       <Hero/>
+      <DragBall/>
     </motion.div>
   )
 }
