@@ -71,8 +71,8 @@ function useFollowPointer(
         restDelta: 0.001
     }
 
-    const xPoint = useMotionValue(0)
-    const yPoint = useMotionValue(0)
+    const xPoint = useMotionValue(-1000)
+    const yPoint = useMotionValue(-1000)
     const x = useSpring(xPoint, { ...springConfig, delay })
     const y = useSpring(yPoint, { ...springConfig, delay })
 
