@@ -76,15 +76,15 @@ function Hero() {
 
         <motion.div 
           variants={buttonVariants}
-          className="mt-8 flex justify-center gap-4"
+          className="mt-8 flex flex-col sm:flex-row justify-center gap-4 px-4"
         >
           <Button 
             variant="outline" 
             size="lg" 
             onClick={() => window.open("https://github.com/silky-x0", "_blank")}
-            className="flex items-center gap-2"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto text-base sm:text-lg"
           >
-            <FaGithub className="w-5 h-5" />
+            <FaGithub className="w-4 h-4 sm:w-5 sm:h-5" />
             GitHub
           </Button>
           <Button
@@ -93,9 +93,9 @@ function Hero() {
             onClick={() => {
               console.log("Downloading resume...")
             }}
-            className="flex items-center gap-2"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto text-base sm:text-lg"
           >
-            <MdDownload className="w-5 h-5" />
+            <MdDownload className="w-4 h-4 sm:w-5 sm:h-5" />
             Download Resume
           </Button>
         </motion.div>

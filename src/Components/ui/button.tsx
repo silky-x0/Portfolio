@@ -13,9 +13,10 @@ const buttonVariants = cva(
         secondary: "bg-[#776bc0]/80 text-white hover:bg-[#776bc0] backdrop-blur-sm",  
       },
       size: {
-        default: "h-11 px-6",
-        sm: "h-9 px-4",
-        lg: "h-12 px-8 text-lg",
+        default: "h-10 px-4",
+        sm: "h-8 px-3 text-sm",
+        lg: "h-10 sm:h-12 px-4 sm:px-8",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
