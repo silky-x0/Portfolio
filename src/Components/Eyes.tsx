@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 
-const Eyes = () => {
+interface EyesProps {
+  isScrolled?: boolean;
+}
+
+const Eyes = ({ isScrolled = false }: EyesProps) => {
   const leftEyeRef = useRef(null);
   const rightEyeRef = useRef(null);
   const [hasMouseMoved, setHasMouseMoved] = useState(false);
@@ -76,31 +80,76 @@ const Eyes = () => {
     }
   };
 
+  const eyeContainerVariants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      y: -10,
+      transition: {
+        duration: 0.2,
+        ease: "easeIn"
+      }
+    }
+  };
+
+  // Separate color transition timing
+  const eyeClasses = `absolute w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-md hidden sm:flex overflow-hidden ${
+    isScrolled ? "bg-pink-500 transition-colors duration-300 delay-200" : "bg-white transition-colors duration-300"
+  }`;
+
+  const pupilClasses = `pupil w-2 h-2 sm:w-3 sm:h-3 md:w-5 md:h-5 rounded-full transition-all duration-[50ms] origin-center ${
+    isScrolled ? "bg-white transition-colors duration-300 delay-200" : "bg-black transition-colors duration-300"
+  }`;
+
+  const eyelidClasses = `absolute inset-0 origin-top ${
+    isScrolled ? "bg-black transition-colors duration-300 delay-200" : "bg-[#1B1B1B] transition-colors duration-300"
+  }`;
+
   return (
-    <>
+    <motion.div
+      variants={eyeContainerVariants}
+      initial="visible"
+      animate={isScrolled ? "hidden" : "visible"}
+      className="absolute w-full h-full"
+    >
       <div 
         ref={leftEyeRef}
-        className="absolute left-[-40px] sm:left-[-60px] md:left-[-80px] lg:left-[-150px] top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center shadow-md hidden sm:flex overflow-hidden"
+        className={`${eyeClasses} left-[-40px] sm:left-[-60px] md:left-[-80px] lg:left-[-150px] top-1/2 -translate-y-1/2`}
       >
-        <div className="pupil w-2 h-2 sm:w-3 sm:h-3 md:w-5 md:h-5 bg-black rounded-full transition-transform duration-[50ms] origin-center" />
+        <motion.div 
+          className={pupilClasses}
+          whileHover={{ scale: 1.2 }}
+        />
         <motion.div
           animate={controls}
           variants={eyelidVariants}
-          className="absolute inset-0 bg-[#1B1B1B] origin-top"
+          className={eyelidClasses}
         />
       </div>
       <div 
         ref={rightEyeRef}
-        className="absolute right-[-40px] sm:right-[-60px] md:right-[-80px] lg:right-[-150px] top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center shadow-md hidden sm:flex overflow-hidden"
+        className={`${eyeClasses} right-[-40px] sm:right-[-60px] md:right-[-80px] lg:right-[-150px] top-1/2 -translate-y-1/2`}
       >
-        <div className="pupil w-2 h-2 sm:w-3 sm:h-3 md:w-5 md:h-5 bg-black rounded-full transition-transform duration-[50ms] origin-center" />
+        <motion.div 
+          className={pupilClasses}
+          whileHover={{ scale: 1.2 }}
+        />
         <motion.div
           animate={controls}
           variants={eyelidVariants}
-          className="absolute inset-0 bg-[#1B1B1B] origin-top"
+          className={eyelidClasses}
         />
       </div>
-    </>
+    </motion.div>
   );
 };
 

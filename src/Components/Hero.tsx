@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Button } from "./ui/button"
 import { FaGithub } from 'react-icons/fa'  
 import { MdDownload } from 'react-icons/md'  
+import { Link } from 'react-scroll'
 
 function Hero() {
   const containerVariants = {
@@ -43,8 +44,104 @@ function Hero() {
     },
   }
 
+  const shapeVariants = {
+    hidden: { opacity: 0, scale: 0, rotate: -90 },
+    visible: {
+      opacity: 0.3,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 1,
+        ease: [0.76, 0, 0.24, 1],
+      },
+    },
+  }
+
+  const floatingAnimation = {
+    y: [0, -20, 0],
+    rotate: [0, 10, -10, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 overflow-hidden" id="home">
+      
+      <motion.svg
+        className="absolute w-20 h-20 left-[10%] top-[20%] text-pink-500/30"
+        viewBox="0 0 24 24"
+        variants={shapeVariants}
+        initial="hidden"
+        animate={[
+          "visible",
+          {
+            y: [0, -15, 0],
+            rotate: [0, 360],
+            transition: {
+              duration: 6,
+              rotate: {
+                duration: 12,
+              },
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }
+        ]}
+      >
+        <circle cx="12" cy="12" r="10" fill="currentColor" />
+      </motion.svg>
+
+      <motion.svg
+        className="absolute w-16 h-16 right-[15%] top-[30%] text-yellow-500/30"
+        viewBox="0 0 24 24"
+        variants={shapeVariants}
+        initial="hidden"
+        animate={[
+          "visible",
+          {
+            x: [0, 15, 0],
+            rotate: [-360, 0],
+            transition: {
+              duration: 8,
+              rotate: {
+                duration: 15,
+              },
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }
+        ]}
+      >
+        <rect x="2" y="2" width="20" height="20" fill="currentColor" />
+      </motion.svg>
+
+      <motion.svg
+        className="absolute w-24 h-24 left-[20%] bottom-[20%] text-red-500/30"
+        viewBox="0 0 24 24"
+        variants={shapeVariants}
+        initial="hidden"
+        animate={[
+          "visible",
+          {
+            y: [0, 20, 0],
+            rotate: [0, -360],
+            transition: {
+              duration: 7,
+              rotate: {
+                duration: 20,
+              },
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }
+        ]}
+      >
+        <polygon points="12 2 22 22 2 22" fill="currentColor" />
+      </motion.svg>
+
       <motion.div
         className="text-center relative w-full"
         variants={containerVariants}

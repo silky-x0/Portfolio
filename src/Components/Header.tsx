@@ -1,12 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import Eyes from './Eyes';
 
 const Header = ({ title = "Akhil" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMenuEnter = () => {
     if (timeoutRef.current) {
@@ -16,7 +26,7 @@ const Header = ({ title = "Akhil" }) => {
   };
 
   const handleMenuLeave = () => {
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       setIsMenuOpen(false);
     }, 300);
   };
@@ -57,11 +67,17 @@ const Header = ({ title = "Akhil" }) => {
       initial="hidden"
       animate="visible"
     >
-      <header className="w-full max-w-[90%] sm:max-w-3xl bg-white backdrop-blur-sm mx-2 md:mx-4 rounded-full relative">
-        <Eyes />
+      <header className={`w-full max-w-[90%] sm:max-w-3xl ${
+        isScrolled ? 'bg-[#1B1B1B]/80' : 'bg-white'
+      } backdrop-blur-sm mx-2 md:mx-4 rounded-full relative transition-colors duration-300`}>
+        <Eyes isScrolled={isScrolled} />
         <div className="px-2 sm:px-3 md:px-4 py-2 md:py-3 flex justify-between items-center">
           <motion.h1 
-            className="text-xl sm:text-2xl md:text-4xl text-gray-800 font-medium"
+            className={`text-xl sm:text-2xl md:text-4xl font-medium ${
+              isScrolled 
+                ? 'text-white hover:bg-gradient-to-r hover:from-pink-500 hover:via-red-500 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent'
+                : 'text-gray-800'
+            } transition-all duration-300`}
             style={{ fontFamily: "'Playfair Display', serif" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -75,11 +91,15 @@ const Header = ({ title = "Akhil" }) => {
             className="relative"
           >
             <button 
-              className="p-1 hover:bg-gray-300/50 transition-colors rounded-full"
+              className={`p-1 ${
+                isScrolled 
+                  ? 'hover:bg-white/20 text-white' 
+                  : 'hover:bg-gray-300/50 text-gray-700'
+              } transition-colors rounded-full`}
               aria-label="Menu"
               aria-expanded={isMenuOpen}
             >
-              <Menu className="w-8 h-8 md:w-11 md:h-9 text-gray-700" /> 
+              <Menu className="w-8 h-8 md:w-11 md:h-9" /> 
             </button>
             <AnimatePresence>
               {isMenuOpen && (
@@ -88,13 +108,25 @@ const Header = ({ title = "Akhil" }) => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="absolute top-full right-0 mt-2 w-36 md:w-48 bg-white rounded-lg shadow-lg py-2 z-50"
+                  className={`absolute top-full right-0 mt-2 w-36 md:w-48 ${
+                    isScrolled ? 'bg-black/80 backdrop-blur-sm' : 'bg-white'
+                  } rounded-lg shadow-lg py-2 z-50`}
                 >
-                  <nav className="flex flex-col text-black text-sm md:text-base">
-                    <a href="#" className="px-4 py-2 hover:bg-gray-100 transition-colors">Home</a>
-                    <a href="#" className="px-4 py-2 hover:bg-gray-100 transition-colors">About</a>
-                    <a href="#" className="px-4 py-2 hover:bg-gray-100 transition-colors">Projects</a>
-                    <a href="#" className="px-4 py-2 hover:bg-gray-100 transition-colors">Contact</a>
+                  <nav className="flex flex-col text-sm md:text-base">
+                    {['home', 'skills', 'projects', 'contact'].map((item) => (
+                      <a
+                        key={item}
+                        href={`#${item}`}
+                        className={`px-4 py-2 capitalize ${
+                          isScrolled
+                            ? 'text-white/70 hover:text-pink-500 hover:bg-white/10'
+                            : 'text-gray-800 hover:bg-gray-100'
+                        } transition-colors`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item}
+                      </a>
+                    ))}
                   </nav>
                 </motion.div>
               )}

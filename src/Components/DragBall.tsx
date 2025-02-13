@@ -3,12 +3,12 @@ import { RefObject, useEffect, useRef } from "react"
 
 export default function DragBall() {
     const colors = [
-        "rgba(255, 82, 82, 0.1)",   // red
-        "rgba(106, 90, 205, 0.1)",  // purple
-        "rgba(64, 224, 208, 0.1)",  // turquoise
-        "rgba(255, 165, 0, 0.1)",   // orange
-        "rgba(50, 205, 50, 0.1)",   // lime
-        "rgba(147, 112, 219, 0.1)", // violet
+        "rgba(255, 82, 82, 0.2)",   // red
+        "rgba(106, 90, 205, 0.2)",  // purple
+        "rgba(64, 224, 208, 0.2)",  // turquoise
+        "rgba(255, 165, 0, 0.2)",   // orange
+        "rgba(50, 205, 50, 0.2)",   // lime
+        "rgba(147, 112, 219, 0.2)", // violet
     ];
 
     const balls = Array.from({ length: 6 }, (_, i) => ({
@@ -110,11 +110,13 @@ const spring = {
 }
 
 const ballStyle = {
-    position: "absolute" as const,
+    position: "fixed" as const,
     width: 20,
     height: 20,
     borderRadius: "50%",
     backdropFilter: "blur(8px)",
     pointerEvents: "none" as const,
+    zIndex: 9999,
+    mixBlendMode: "screen" as const,
 }
 
