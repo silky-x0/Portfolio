@@ -77,12 +77,15 @@ function Hero() {
   };
 
   const cursorVariants = {
-    blinking: {
+    initial: { opacity: 0 },
+    animate: {
       opacity: [0, 0, 1, 1],
       transition: {
         duration: 1,
         repeat: Infinity,
-        repeatDelay: 0
+        repeatDelay: 0,
+        // Start blinking after name appears
+        delay: 0.6
       }
     }
   };
@@ -143,7 +146,8 @@ function Hero() {
             <motion.span
               className="absolute -right-4 top-0 text-pink-500"
               variants={cursorVariants}
-              animate="blinking"
+              initial="initial"
+              animate="animate"
             >
               |
             </motion.span>
