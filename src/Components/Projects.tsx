@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { useRef } from 'react'
 
@@ -49,69 +49,38 @@ function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start start", "end end"]
   });
-
-  const x = useTransform(scrollYProgress, 
-    [0.2, 0.8], 
-    ["0%", "-100%"]
-  );
-
-  const opacity = useTransform(scrollYProgress,
-    [0.2, 0.3, 0.7, 0.8],
-    [0, 1, 1, 0]
-  );
 
   return (
     <section 
       ref={containerRef}
       id="projects" 
-      className="min-h-screen py-20 bg-zinc-900/80 overflow-x-hidden"
+      className="min-h-[300vh] py-20 bg-gradient-to-b from-black to-zinc-900/80 relative"
     >
-      <div className="container mx-auto px-4">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-violet-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
-        >
-          Projects
-        </motion.h2>
+      <div className="sticky top-0 min-h-screen flex flex-col justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-transparent to-indigo-500/10 animate-gradient" />
+        
+        <div className="container mx-auto px-4 relative">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold text-center mb-32 bg-gradient-to-r from-violet-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
+          >
+            Projects
+          </motion.h2>
 
-        <div className="relative">
-          {/* Initial two projects */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.slice(0, 2).map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-zinc-800/50 rounded-lg p-6 hover:bg-zinc-800/80 transition-colors border border-zinc-700/50"
-              >
-                <ProjectContent project={project} />
-              </motion.div>
+          <div className="relative max-w-4xl mx-auto h-[600px]">
+            {projects.map((project, index) => (
+              <ProjectCard 
+                key={project.title} 
+                project={project} 
+                index={index}
+                progress={scrollYProgress}
+                total={projects.length}
+              />
             ))}
-          </div>
-
-          {/* Horizontal scrolling projects */}
-          <div className="absolute top-0 left-full w-screen overflow-hidden">
-            <motion.div 
-              style={{ x, opacity }}
-              className="flex gap-8 pl-8"
-            >
-              {projects.slice(2).map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="min-w-[300px] md:min-w-[400px] bg-zinc-800/50 rounded-lg p-6 hover:bg-zinc-800/80 transition-colors border border-zinc-700/50"
-                >
-                  <ProjectContent project={project} />
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </div>
       </div>
@@ -119,18 +88,83 @@ function Projects() {
   )
 }
 
-// Separate component for project content to avoid repetition
-function ProjectContent({ project }: { project: typeof projects[0] }) {
+function ProjectCard({ 
+  project, 
+  index, 
+  progress,
+  total
+}: { 
+  project: typeof projects[0];
+  index: number;
+  progress: MotionValue<number>;
+  total: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  const y = useTransform(
+    progress,
+    [index / total, (index + 1) / total],
+    [0, -200],
+    {
+      clamp: false // Prevents sudden jumps
+    }
+  );
+
+  const opacity = useTransform(
+    progress,
+    [
+      Math.max(0, index - 0.5) / total, // Start fade when previous card is halfway
+      index / total, // Fully visible at start
+      (index + 0.8) / total, // Start fading out later
+      (index + 1) / total // Fully transparent at end
+    ],
+    [0, 1, 1, 0]
+  );
+
+  const scale = useTransform(
+    progress,
+    [
+      index / total,
+      (index + 0.8) / total,
+      (index + 1) / total
+    ],
+    [1, 1, 0.8]
+  );
+
+  const pointerEvents = useTransform(
+    progress,
+    ([index - 0.1, index + 0.8].map(v => v / total)),
+    ["all", "none"]
+  );
+
   return (
-    <>
-      <div className="aspect-video mb-4 overflow-hidden rounded-lg bg-zinc-700/50">
-        <div className="w-full h-full bg-gradient-to-br from-violet-500/20 to-indigo-500/20" />
+    <motion.div
+      ref={cardRef}
+      style={{ 
+        y,
+        opacity,
+        scale,
+        zIndex: total - index,
+        pointerEvents
+      }}
+      className="absolute top-0 left-0 right-0 bg-zinc-800/50 rounded-lg p-6 hover:bg-zinc-800/80 transition-colors border border-zinc-700/50 backdrop-blur-sm"
+    >
+      <div className="aspect-video mb-4 overflow-hidden rounded-lg bg-zinc-700/50 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-indigo-500/20 hover:opacity-75 transition-opacity" />
+        {/* Add project image here */}
       </div>
-      <h3 className="text-2xl font-bold text-white mb-4">{project.title}</h3>
-      <p className="text-zinc-300 mb-4 line-clamp-3">{project.description}</p>
+      <h3 className="text-2xl font-bold text-white mb-4 hover:text-violet-400 transition-colors">
+        {project.title}
+      </h3>
+      <p className="text-zinc-300 mb-4 line-clamp-3">
+        {project.description}
+      </p>
       <div className="flex flex-wrap gap-2 mb-4">
         {project.tech.map(tech => (
-          <span key={tech} className="px-3 py-1 bg-violet-500/10 rounded-full text-sm text-violet-300">
+          <span 
+            key={tech} 
+            className="px-3 py-1 bg-violet-500/10 rounded-full text-sm text-violet-300 hover:bg-violet-500/20 transition-colors"
+          >
             {tech}
           </span>
         ))}
@@ -157,7 +191,7 @@ function ProjectContent({ project }: { project: typeof projects[0] }) {
           <FaExternalLinkAlt className="w-6 h-6" />
         </motion.a>
       </div>
-    </>
+    </motion.div>
   )
 }
 
