@@ -67,8 +67,49 @@ function Hero() {
     }
   }
 
+  // Add new animation variants
+  const nameHighlightVariants = {
+    initial: { width: "0%" },
+    animate: {
+      width: "100%",
+      transition: { duration: 1, delay: 1.2 }
+    }
+  };
+
+  const cursorVariants = {
+    blinking: {
+      opacity: [0, 0, 1, 1],
+      transition: {
+        duration: 1,
+        repeat: Infinity,
+        repeatDelay: 0
+      }
+    }
+  };
+
+  const backgroundVariants = {
+    initial: { 
+      backgroundPosition: "0% 50%"
+    },
+    animate: {
+      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+      transition: {
+        duration: 15,
+        ease: "linear",
+        repeat: Infinity
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 overflow-hidden" id="home">
+    <motion.div 
+      className="min-h-screen flex items-center justify-center px-4 overflow-hidden relative bg-gradient-to-r from-black via-zinc-900 to-black"
+      variants={backgroundVariants}
+      initial="initial"
+      animate="animate"
+    >
+      {/* Animated background grid */}
+      <div className="absolute inset-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_70%,transparent_100%)]" />
       
       <motion.svg
         className="absolute w-20 h-20 left-[10%] top-[20%] text-pink-500/30"
@@ -143,7 +184,7 @@ function Hero() {
       </motion.svg>
 
       <motion.div
-        className="text-center relative w-full"
+        className="text-center relative w-full z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -156,13 +197,28 @@ function Hero() {
           >
             Hi, I'm
           </motion.span>
-          <motion.span
-            variants={textVariants}
-            className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent relative"
-            style={{ fontFamily: "'Caveat', cursive" }}
-          >
-            Akhilesh
-          </motion.span>
+          <div className="relative">
+            <motion.span
+              variants={textVariants}
+              className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-transparent relative"
+              style={{ fontFamily: "'Caveat', cursive" }}
+            >
+              Akhilesh
+            </motion.span>
+            <motion.div
+              className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"
+              variants={nameHighlightVariants}
+              initial="initial"
+              animate="animate"
+            />
+            <motion.span
+              className="absolute -right-4 top-0 text-pink-500"
+              variants={cursorVariants}
+              animate="blinking"
+            >
+              |
+            </motion.span>
+          </div>
         </div>
         <motion.p 
           variants={textVariants} 
@@ -197,7 +253,7 @@ function Hero() {
           </Button>
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   )
 }
 
