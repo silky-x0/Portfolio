@@ -32,12 +32,19 @@ const Header = ({ title = "Akhil" }) => {
   };
 
   const headerVariants = {
-    hidden: { y: -100 },
+    hidden: { 
+      y: -150,
+      opacity: 0,
+    },
     visible: {
       y: 0,
+      opacity: 1,
       transition: {
-        duration: 0.8,
-        ease: [0.76, 0, 0.24, 1]
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        mass: 1,
+        duration: 0.6
       }
     }
   };
