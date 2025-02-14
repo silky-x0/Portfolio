@@ -78,9 +78,9 @@ const Header = ({ title = "Akhil" }) => {
         isScrolled ? 'bg-[#1B1B1B]/80' : 'bg-white'
       } backdrop-blur-sm mx-2 md:mx-4 rounded-full relative transition-colors duration-300`}>
         <Eyes isScrolled={isScrolled} />
-        <div className="px-2 sm:px-3 md:px-4 py-2 md:py-3 flex justify-between items-center">
+        <div className="px-2 sm:px-3 md:px-4 py-1 sm:py-2 md:py-3 flex justify-between items-center">
           <motion.h1 
-            className={`text-xl sm:text-2xl md:text-4xl font-medium ${
+            className={`text-lg sm:text-xl md:text-4xl font-medium ${
               isScrolled 
                 ? 'text-white hover:bg-gradient-to-r hover:from-pink-500 hover:via-red-500 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent'
                 : 'text-gray-800'
