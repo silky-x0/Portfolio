@@ -52,7 +52,15 @@ function Projects() {
     offset: ["start end", "end start"]
   });
 
-  const x = useTransform(scrollYProgress, [0.2, 0.8], ["100%", "-100%"]);
+  const x = useTransform(scrollYProgress, 
+    [0.2, 0.8], 
+    ["0%", "-100%"]
+  );
+
+  const opacity = useTransform(scrollYProgress,
+    [0.2, 0.3, 0.7, 0.8],
+    [0, 1, 1, 0]
+  );
 
   return (
     <section 
@@ -89,7 +97,7 @@ function Projects() {
           {/* Horizontal scrolling projects */}
           <div className="absolute top-0 left-full w-screen overflow-hidden">
             <motion.div 
-              style={{ x }}
+              style={{ x, opacity }}
               className="flex gap-8 pl-8"
             >
               {projects.slice(2).map((project, index) => (
