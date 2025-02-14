@@ -121,7 +121,7 @@ function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <div className="text-4xl md:text-6xl lg:text-8xl flex flex-wrap justify-center gap-2">
+        <div className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl flex flex-wrap justify-center gap-2">
           <motion.span
             variants={textVariants}
             className="font-lora text-white"
@@ -155,7 +155,7 @@ function Hero() {
         </div>
         <motion.p 
           variants={textVariants} 
-          className="text-lg my-3 py-3 md:text-2xl text-white/80"
+          className="text-sm sm:text-lg md:text-2xl text-white/80 my-2 sm:my-3 py-2 sm:py-3"
         >
           Aspiring Software Developer | Building Scalable & Smart Solutions
         </motion.p>
