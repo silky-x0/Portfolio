@@ -110,78 +110,7 @@ function Hero() {
     >
       {/* Animated background grid */}
       <div className="absolute inset-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_70%,transparent_100%)]" />
-      
-      <motion.svg
-        className="absolute w-20 h-20 left-[10%] top-[20%] text-pink-500/30"
-        viewBox="0 0 24 24"
-        variants={shapeVariants}
-        initial="hidden"
-        animate={[
-          "visible",
-          {
-            y: [0, -15, 0],
-            rotate: [0, 360],
-            transition: {
-              duration: 6,
-              rotate: {
-                duration: 12,
-              },
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }
-        ]}
-      >
-        <circle cx="12" cy="12" r="10" fill="currentColor" />
-      </motion.svg>
-
-      <motion.svg
-        className="absolute w-16 h-16 right-[15%] top-[30%] text-yellow-500/30"
-        viewBox="0 0 24 24"
-        variants={shapeVariants}
-        initial="hidden"
-        animate={[
-          "visible",
-          {
-            x: [0, 15, 0],
-            rotate: [-360, 0],
-            transition: {
-              duration: 8,
-              rotate: {
-                duration: 15,
-              },
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }
-        ]}
-      >
-        <rect x="2" y="2" width="20" height="20" fill="currentColor" />
-      </motion.svg>
-
-      <motion.svg
-        className="absolute w-24 h-24 left-[20%] bottom-[20%] text-red-500/30"
-        viewBox="0 0 24 24"
-        variants={shapeVariants}
-        initial="hidden"
-        animate={[
-          "visible",
-          {
-            y: [0, 20, 0],
-            rotate: [0, -360],
-            transition: {
-              duration: 7,
-              rotate: {
-                duration: 20,
-              },
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }
-        ]}
-      >
-        <polygon points="12 2 22 22 2 22" fill="currentColor" />
-      </motion.svg>
+    
 
       <motion.div
         className="text-center relative w-full z-10"
