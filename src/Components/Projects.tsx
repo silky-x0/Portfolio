@@ -20,14 +20,6 @@ const projects = [
     image: "/ai-chat.png"
   },
   {
-    title: "E-Commerce Dashboard",
-    description: "Admin dashboard for e-commerce platforms with analytics, inventory management, and order processing capabilities.",
-    tech: ["React", "Redux", "Node.js", "Express"],
-    github: "https://github.com/yourusername/ecommerce-dashboard",
-    live: "#",
-    image: "/dashboard.png"
-  },
-  {
     title: "Weather App",
     description: "Beautiful weather application with real-time updates, location tracking, and weekly forecasts.",
     tech: ["React Native", "Weather API", "Geolocation"],
