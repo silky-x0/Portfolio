@@ -2,8 +2,39 @@ import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import { FaGithub, FaLinkedin, FaReddit } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import emailjs from '@emailjs/browser'
+import { useRef, useState, useEffect } from 'react'
 
 function Contact() {
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  // Initialize EmailJS on component mount (if you haven't done it elsewhere)
+  useEffect(() => {
+    emailjs.init("dzdRGmTf3m9Sq0Kg0");
+  }, []);
+
+  const onSubmitHandle = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage(null);
+
+    emailjs.sendForm('service_s3b2igl', 'template_v20hlmb', form.current, 'dzdRGmTf3m9Sq0Kg0')
+      .then((result) => {
+        console.log(result.text);
+        setMessage({ type: 'success', text: 'Message sent successfully!' });
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.log(error.text);
+        setMessage({ type: 'error', text: 'Something went wrong: ' + error.text });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
+
   const socialLinks = [
     {
       icon: FaGithub,
@@ -45,10 +76,12 @@ function Contact() {
           transition={{ duration: 0.5 }}
           className="max-w-md mx-auto"
         >
-          <form className="space-y-6">
+          <form ref={form} onSubmit={onSubmitHandle} className="space-y-6">
             <div>
               <input
                 type="text"
+                name="Name"
+                required
                 placeholder="Name"
                 className="w-full p-3 rounded-lg bg-zinc-800/50 border border-zinc-700 text-white focus:outline-none focus:border-violet-500"
               />
@@ -56,6 +89,8 @@ function Contact() {
             <div>
               <input
                 type="email"
+                name="Email"
+                required
                 placeholder="Email"
                 className="w-full p-3 rounded-lg bg-zinc-800/50 border border-zinc-700 text-white focus:outline-none focus:border-violet-500"
               />
@@ -63,15 +98,26 @@ function Contact() {
             <div>
               <textarea
                 placeholder="Message"
+                name="Message"
+                required
                 rows={4}
                 className="w-full p-3 rounded-lg bg-zinc-800/50 border border-zinc-700 text-white focus:outline-none focus:border-violet-500"
               />
             </div>
-            <Button 
+            
+            {message && (
+              <div className={`py-2 px-3 rounded ${message.type === 'success' ? 'bg-green-800/30 text-green-300' : 'bg-red-800/30 text-red-300'}`}>
+                {message.text}
+              </div>
+            )}
+            
+            <Button
+              type='submit' 
               variant="default"
               className="w-full bg-violet-600 hover:bg-violet-700 transition-colors"
+              disabled={isSubmitting}
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
 
@@ -97,4 +143,4 @@ function Contact() {
   )
 }
 
-export default Contact 
+export default Contact
