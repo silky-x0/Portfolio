@@ -74,7 +74,6 @@ function Skills() {
               className="flex flex-col items-center p-6 rounded-lg bg-zinc-800/50 hover:bg-zinc-800/80 border border-zinc-700/50 backdrop-blur-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-shadow duration-200"
             >
               <motion.div
-                whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.3 }}
                 className="relative"
               >
