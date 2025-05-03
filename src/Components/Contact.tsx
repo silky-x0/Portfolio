@@ -10,10 +10,6 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState(null);
 
-  // Initialize EmailJS on component mount (if you haven't done it elsewhere)
-  useEffect(() => {
-    emailjs.init("dzdRGmTf3m9Sq0Kg0");
-  }, []);
 
   const onSubmitHandle = (e) => {
     e.preventDefault();
