@@ -103,15 +103,15 @@ const Eyes = ({ isScrolled = false }: EyesProps) => {
 
   // Separate color transition timing
   const eyeClasses = `absolute w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-md hidden sm:flex overflow-hidden ${
-    isScrolled ? "bg-pink-500 transition-colors duration-300 delay-200" : "bg-white transition-colors duration-300"
+    isScrolled ? "bg-black transition-colors duration-300 delay-400" : "bg-white transition-colors duration-300"
   }`;
 
   const pupilClasses = `pupil w-2 h-2 sm:w-3 sm:h-3 md:w-5 md:h-5 rounded-full transition-all duration-[50ms] origin-center ${
-    isScrolled ? "bg-white transition-colors duration-300 delay-200" : "bg-black transition-colors duration-300"
+    isScrolled ? "bg-black transition-colors duration-300 delay-400" : "bg-black transition-colors duration-300"
   }`;
 
   const eyelidClasses = `absolute inset-0 origin-top ${
-    isScrolled ? "bg-black transition-colors duration-300 delay-200" : "bg-[#1B1B1B] transition-colors duration-300"
+    isScrolled ? "bg-black transition-colors duration-300 delay-400" : "bg-[#1B1B1B] transition-colors duration-300"
   }`;
 
   return (
