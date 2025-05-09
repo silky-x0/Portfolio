@@ -7,32 +7,32 @@ const projects = [
     title: "Portfolio Website",
     description: "A modern portfolio website built with React, TypeScript, and Framer Motion. Features smooth animations, responsive design, and interactive elements.",
     tech: ["React", "TypeScript", "Tailwind", "Framer Motion"],
-    github: "https://github.com/yourusername/portfolio",
-    live: "#",
+    github: "https://github.com/silky-x0/Portfolio",
+    live: "Yes",
     image: "/portfolio.png"
   },
   {
-    title: "AI Chat Application",
-    description: "Real-time chat application powered by AI. Includes features like message history, typing indicators, and AI-powered responses.",
-    tech: ["Next.js", "OpenAI", "Socket.io", "MongoDB"],
-    github: "https://github.com/yourusername/ai-chat",
-    live: "#",
-    image: "/ai-chat.png"
+    title: "AI Chat to Doc App",
+    description: "AI powered chat application. Includes features like message history, Source Indicators, and AI-powered responses.",
+    tech: ["Next.js", "Gemini AI", "Autho0", "Firebase"],
+    github: "https://github.com/silky-x0/Chat2DocV2",
+    live: "Yes",
+    image: "/Desk.png"
   },
   {
-    title: "Weather App",
-    description: "Beautiful weather application with real-time updates, location tracking, and weekly forecasts.",
-    tech: ["React Native", "Weather API", "Geolocation"],
-    github: "https://github.com/yourusername/weather-app",
-    live: "#",
+    title: "Operating System",
+    description: "A minimal OS built with Assembly and C++",
+    tech: ["C++", "Assembly"],
+    github: "https://github.com/silky-x0/Kernel-OS",
+    live: "In-making",
     image: "/weather.png"
   },
   {
-    title: "Task Management System",
-    description: "Collaborative task management tool with real-time updates, drag-and-drop interface, and team collaboration features.",
-    tech: ["Vue.js", "Firebase", "Vuex", "TailwindCSS"],
-    github: "https://github.com/yourusername/task-manager",
-    live: "#",
+    title: "Spam Detector",
+    description: "Detects or marks if mail if spam or not",
+    tech: ["Python", "Jupyter"],
+    github: "https://github.com/silky-x0/Spam-detector",
+    live: "No",
     image: "/tasks.png"
   }
 ];
