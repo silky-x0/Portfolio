@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
-import { FaReact, FaNodeJs, FaPython, FaDatabase } from 'react-icons/fa'
-import { SiTypescript, SiTailwindcss } from 'react-icons/si'
+import { FaReact, FaNodeJs, FaPython } from 'react-icons/fa'
+import { SiTypescript, SiTailwindcss, SiMongodb } from 'react-icons/si'
 
 const skills = [
   { icon: FaReact, name: 'React' },
   { icon: SiTypescript, name: 'TypeScript' },
   { icon: FaNodeJs, name: 'Node.js' },
   { icon: FaPython, name: 'Python' },
-  { icon: FaDatabase, name: 'SQL' },
   { icon: SiTailwindcss, name: 'Tailwind' },
+  { icon :  SiMongodb, name: 'MongoDB' },
 ]
 
 function Skills() {
