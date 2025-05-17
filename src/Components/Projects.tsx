@@ -143,7 +143,11 @@ function ProjectCard({
     >
       <div className="aspect-video mb-4 overflow-hidden rounded-lg bg-zinc-700/50 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-indigo-500/20 hover:opacity-75 transition-opacity" />
-        {/* Add project image here */}
+          <img
+            src={project.image}
+            alt={project.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
       </div>
       <h3 className="text-2xl font-bold text-white mb-4 hover:text-violet-400 transition-colors">
         {project.title}
