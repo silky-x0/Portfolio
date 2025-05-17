@@ -157,7 +157,7 @@ function Hero() {
           variants={textVariants} 
           className="text-sm sm:text-lg md:text-2xl text-white/80 my-2 sm:my-3 py-2 sm:py-3"
         >
-          Aspiring Software Developer | Building Scalable & Smart Solutions
+          I Code [Sometimes]
         </motion.p>
 
         <motion.div 
@@ -177,7 +177,12 @@ function Hero() {
             variant="default"  
             size="lg"
             onClick={() => {
-              console.log("Downloading resume...")
+              const link = document.createElement('a');
+              link.href = '/resumeIntern.pdf';
+              link.download = 'Akhilesh-Resume.pdf';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
             }}
             className="flex items-center justify-center gap-2 w-full sm:w-auto text-base sm:text-lg"
           >
