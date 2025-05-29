@@ -1,6 +1,6 @@
 # 🚀 My Portfolio
 
-This is my personal portfolio built using modern web technologies. It showcases my projects, skills, and experience in web development.There's alot to do, this is just landing page now, making it better day by day.
+This is my personal portfolio built using modern web technologies. It showcases my projects, skills, and experience in web development.
 
 ## ✨ Tech Stack
 
