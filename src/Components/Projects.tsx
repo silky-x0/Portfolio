@@ -9,7 +9,7 @@ const projects = [
     tech: ["React", "TypeScript", "Tailwind", "Framer Motion"],
     github: "https://github.com/silky-x0/Portfolio",
     live: "Yes",
-    image: "/portfolio.png"
+    image: "/portfolio1.png"
   },
   {
     title: "AI Chat to Doc App",
