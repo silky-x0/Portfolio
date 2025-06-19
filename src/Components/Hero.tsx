@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Button } from "./ui/button"
 import { FaGithub } from 'react-icons/fa'  
 import { MdDownload } from 'react-icons/md'  
-import { Link } from 'react-scroll'
+import { Scene as RubiksCubeBackground } from "./rubik-s-cube";
 
 function Hero() {
   const containerVariants = {
@@ -44,29 +44,6 @@ function Hero() {
     },
   }
 
-  const shapeVariants = {
-    hidden: { opacity: 0, scale: 0, rotate: -90 },
-    visible: {
-      opacity: 0.3,
-      scale: 1,
-      rotate: 0,
-      transition: {
-        duration: 1,
-        ease: [0.76, 0, 0.24, 1],
-      },
-    },
-  }
-
-  const floatingAnimation = {
-    y: [0, -20, 0],
-    rotate: [0, 10, -10, 0],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
-
   // Add new animation variants
   const nameHighlightVariants = {
     initial: { width: "0%" },
@@ -90,31 +67,13 @@ function Hero() {
     }
   };
 
-  const backgroundVariants = {
-    initial: { 
-      backgroundPosition: "0% 50%"
-    },
-    animate: {
-      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-      transition: {
-        duration: 15,
-        ease: "linear",
-        repeat: Infinity
-      }
-    }
-  };
-
   return (
-    <motion.div 
-      className="min-h-screen flex items-center justify-center px-4 overflow-hidden relative bg-gradient-to-r from-black via-zinc-900 to-black"
-      variants={backgroundVariants}
-      initial="initial"
-      animate="animate"
-    >
-      {/* Animated background grid */}
-      <div className="absolute inset-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_70%,transparent_100%)]" />
-    
-
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+      {/* Rubik's Cube 3D background */}
+      <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+        <RubiksCubeBackground />
+      </div>
+      {/* Content */}
       <motion.div
         className="text-center relative w-full z-10"
         variants={containerVariants}
@@ -191,7 +150,7 @@ function Hero() {
           </Button>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </section>
   )
 }
 
